@@ -8,7 +8,7 @@ exports = module.exports = __webpack_require__(7)();
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".carousel-container{\r\n  margin-bottom: 40px;\r\n}\r\n", ""]);
 
 // exports
 
@@ -26,7 +26,7 @@ exports = module.exports = __webpack_require__(7)();
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".slide-image{\r\n  width: 100%;\r\n}\r\n", ""]);
 
 // exports
 
@@ -129,14 +129,14 @@ module.exports = module.exports.toString();
 /***/ 157:
 /***/ (function(module, exports) {
 
-module.exports = "<app-navbar></app-navbar>\r\n<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div class=\"col-md-3\">\r\n      <app-search></app-search>\r\n    </div>\r\n    <div class=\"col-md-9\">\r\n      <div class=\"row\">\r\n        <app-carousel></app-carousel>\r\n      </div>\r\n      <div class=\"row\">\r\n        <app-product></app-product>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<app-footer></app-footer>\r\n"
+module.exports = "<app-navbar></app-navbar>\r\n<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div class=\"col-md-3\">\r\n      <app-search></app-search>\r\n    </div>\r\n    <div class=\"col-md-9\">\r\n      <div class=\"row carousel-container\">\r\n        <app-carousel></app-carousel>\r\n      </div>\r\n      <div class=\"row\">\r\n        <app-product></app-product>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<app-footer></app-footer>\r\n"
 
 /***/ }),
 
 /***/ 158:
 /***/ (function(module, exports) {
 
-module.exports = "<p>\r\n  carousel works!\r\n</p>\r\n"
+module.exports = "<div class=\"carousel slide\" data-ride=\"carousel\">\r\n  <ol class=\"carousel-indicators\">\r\n    <li class=\"active\"></li>\r\n    <li></li>\r\n    <li></li>\r\n  </ol>\r\n  <div class=\"carousel-inner\">\r\n    <div class=\"item active\">\r\n      <img  class=\"slide-image\" src=\"http://placehold.it/800x300\" alt=\"\">\r\n    </div>\r\n    <div class=\"item\">\r\n      <img  class=\"slide-image\" src=\"http://placehold.it/800x300\" alt=\"\">\r\n    </div>\r\n    <div class=\"item\">\r\n      <img  class=\"slide-image\" src=\"http://placehold.it/800x300\" alt=\"\">\r\n    </div>\r\n  </div>\r\n  <a class=\"left carousel-control\" href=\"javascript:$('.carousel').carousel('prev');\" >\r\n      <span class=\"glyphicon glyphicon-chevron-left\"></span>\r\n  </a>\r\n  <a class=\"right carousel-control\" href=\"javascript:$('.carousel').carousel('next');\" >\r\n    <span class=\"glyphicon glyphicon-chevron-right\"></span>\r\n  </a>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -157,21 +157,21 @@ module.exports = "<nav class=\"navbar navbar-inverse navbar-fixed-top\">\r\n  <d
 /***/ 161:
 /***/ (function(module, exports) {
 
-module.exports = "<p>\r\n  product works!\r\n</p>\r\n"
+module.exports = "<div *ngFor=\"let product of products\" class=\"col-md-4 col-sm-4 col-lg-4\">\r\n  <div  class=\"thumbnail\">\r\n    <img [src]=\"imgUrl\">\r\n      <div class=\"caption\">\r\n        <h4 class=\"pull-right\">{{product.price}}</h4>\r\n        <h4><a href=\"\">{{product.title}}</a></h4>\r\n        <p>{{product.desc}}</p>\r\n      </div>\r\n    <div>\r\n      <app-stars [rating] = \"product.rating\"></app-stars>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
 /***/ 162:
 /***/ (function(module, exports) {
 
-module.exports = "<p>\r\n  search works!\r\n</p>\r\n"
+module.exports = "<form name=\"searchFrom\" role=\"form\">\r\n  <div class=\"form-group\">\r\n    <label for=\"productTitle\">商品名称</label>\r\n    <input type=\"text\" id=\"productTitle\" placeholder=\"商品名称\" class=\"form-control\">\r\n  </div>\r\n  <div class=\"form-group\">\r\n    <label for=\"productPrince\">商品价格</label>\r\n    <input type=\"number\" id=\"productPrince\" placeholder=\"商品价格\" class=\"form-control\">\r\n  </div>\r\n  <div class=\"form-group\">\r\n    <label for=\"productCategory\">商品类别</label>\r\n    <select name=\"\" id=\"productCategory\" class=\"form-control\"></select>\r\n    <!--<input type=\"text\" id=\"productCategory\" placeholder=\"商品类别\" class=\"form-control\">-->\r\n  </div>\r\n  <div class=\"form-group\">\r\n    <button type=\"submit\" class=\"btn btn-primary btn-block\">搜索</button>\r\n  </div>\r\n</form>\r\n"
 
 /***/ }),
 
 /***/ 163:
 /***/ (function(module, exports) {
 
-module.exports = "<p>\r\n  stars works!\r\n</p>\r\n"
+module.exports = "<p>\r\n  <span *ngFor=\"let star of stars\" class=\"glyphicon glyphicon-star\"\r\n  [class.glyphicon-star-empty]=\"star\"></span>\r\n  <!--<span class=\"glyphicon glyphicon-star glyphicon-star-empty\"></span>-->\r\n  <span>{{ rating }}星</span>\r\n</p>\r\n"
 
 /***/ }),
 
@@ -426,6 +426,7 @@ NavbarComponent = __decorate([
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProductComponent; });
+/* unused harmony export Product */
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -438,8 +439,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var ProductComponent = (function () {
     function ProductComponent() {
+        this.imgUrl = 'http://placehold.it/320x150';
     }
     ProductComponent.prototype.ngOnInit = function () {
+        this.products = [
+            new Product(1, '第一个商品', 1.99, 1.5, "这是一个商品，Angular组件学习之旅", ["电子产品", "硬件设施"]),
+            new Product(2, "第二个商品", 2.99, 3.5, "这是二个商品，Angular组件学习之旅", ["硬件设施"]),
+            new Product(3, "第三个商品", 3.99, 2.5, "这是三个商品，Angular组件学习之旅", ["电子产品", "硬件设施"]),
+            new Product(4, "第四个商品", 4.99, 4.5, "这是四个商品，Angular组件学习之旅", ["电子产品", "硬件设施"]),
+            new Product(5, "第五个商品", 5.99, 3.5, "这是五个商品，Angular组件学习之旅", ["电子产品"]),
+            new Product(6, "第六个商品", 6.99, 5, "这是六个商品，Angular组件学习之旅", ["图书"])
+        ];
     };
     return ProductComponent;
 }());
@@ -451,6 +461,18 @@ ProductComponent = __decorate([
     }),
     __metadata("design:paramtypes", [])
 ], ProductComponent);
+
+var Product = (function () {
+    function Product(id, title, price, rating, desc, categories) {
+        this.id = id;
+        this.title = title;
+        this.price = price;
+        this.rating = rating;
+        this.desc = desc;
+        this.categories = categories;
+    }
+    return Product;
+}());
 
 //# sourceMappingURL=product.component.js.map
 
@@ -510,11 +532,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var StarsComponent = (function () {
     function StarsComponent() {
+        this.rating = 0;
     }
     StarsComponent.prototype.ngOnInit = function () {
+        this.stars = [];
+        for (var i = 1; i <= 5; i++) {
+            this.stars.push(i > this.rating);
+        }
+        // this.stars = [false, false, true, true, true];
     };
     return StarsComponent;
 }());
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* Input */])(),
+    __metadata("design:type", Number)
+], StarsComponent.prototype, "rating", void 0);
 StarsComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_3" /* Component */])({
         selector: 'app-stars',
