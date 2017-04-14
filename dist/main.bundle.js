@@ -136,42 +136,42 @@ module.exports = "<app-navbar></app-navbar>\r\n<div class=\"container\">\r\n  <d
 /***/ 158:
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  carousel works!\n</p>\n"
+module.exports = "<p>\r\n  carousel works!\r\n</p>\r\n"
 
 /***/ }),
 
 /***/ 159:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <hr>\n  <footer>\n    <div class=\"row\">\n      <div class=\"col-lg-12\">\n        <p>Angular 4 实战练习 &copy;2017.4 <a href=\"https://github.com/huangpuyuan\" target=\"_blank\">written by 开泰</a></p>\n      </div>\n    </div>\n  </footer>\n</div>\n"
+module.exports = "<div class=\"container\">\r\n  <hr>\r\n  <footer>\r\n    <div class=\"row\">\r\n      <div class=\"col-lg-12\">\r\n        <p>Angular 4 实战练习 &copy;2017.4 <a href=\"https://github.com/huangpuyuan\" target=\"_blank\">written by 开泰</a></p>\r\n      </div>\r\n    </div>\r\n  </footer>\r\n</div>\r\n"
 
 /***/ }),
 
 /***/ 160:
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-inverse navbar-fixed-top\">\n  <div class=\"container\">\n    <div class=\"navbar-header\">\n      <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-ex1-collapse\">\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button>\n      <a href=\"#\" class=\"navbar-brand\">在线竞拍</a>\n    </div>\n    <div class=\"collapse navbar-collapse navbar-ex1-collapse\">\n      <ul class=\"nav navbar-nav\">\n        <li><a href=\"#\">关于我们</a></li>\n        <li><a href=\"#\">联系我们</a></li>\n        <li><a href=\"#\">网站地图</a></li>\n      </ul>\n    </div>\n  </div>\n</nav>\n\n"
+module.exports = "<nav class=\"navbar navbar-inverse navbar-fixed-top\">\r\n  <div class=\"container\">\r\n    <div class=\"navbar-header\">\r\n      <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-ex1-collapse\">\r\n        <span class=\"icon-bar\"></span>\r\n        <span class=\"icon-bar\"></span>\r\n        <span class=\"icon-bar\"></span>\r\n      </button>\r\n      <a href=\"#\" class=\"navbar-brand\">在线竞拍</a>\r\n    </div>\r\n    <div class=\"collapse navbar-collapse navbar-ex1-collapse\">\r\n      <ul class=\"nav navbar-nav\">\r\n        <li><a href=\"#\">关于我们</a></li>\r\n        <li><a href=\"#\">联系我们</a></li>\r\n        <li><a href=\"#\">网站地图</a></li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</nav>\r\n\r\n"
 
 /***/ }),
 
 /***/ 161:
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  product works!\n</p>\n"
+module.exports = "<p>\r\n  product works!\r\n</p>\r\n"
 
 /***/ }),
 
 /***/ 162:
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  search works!\n</p>\n"
+module.exports = "<p>\r\n  search works!\r\n</p>\r\n"
 
 /***/ }),
 
 /***/ 163:
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  stars works!\n</p>\n"
+module.exports = "<p>\r\n  stars works!\r\n</p>\r\n"
 
 /***/ }),
 
