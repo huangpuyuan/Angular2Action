@@ -1,0 +1,21 @@
+{
+  "name": "angular2-action",
+  "description": "",
+  "main": "",
+  "authors": [
+    "huangpuyuan <huangpuyuan@outlook.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/huangpuyuan/Angular2Action",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "bootstrap": "^3.3.7"
+  }
+}
