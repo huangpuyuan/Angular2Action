@@ -353,11 +353,25 @@ var ProductDetailComponent = (function () {
     function ProductDetailComponent(routeInfo, productService) {
         this.routeInfo = routeInfo;
         this.productService = productService;
+        this.newRating = 5;
+        this.newComment = '';
+        this.isCommentHidden = true;
     }
     ProductDetailComponent.prototype.ngOnInit = function () {
         var productId = this.routeInfo.snapshot.params['productId'];
         this.product = this.productService.getProduct(productId);
         this.comments = this.productService.getCommentsForProuctId(productId);
+    };
+    ProductDetailComponent.prototype.addComment = function () {
+        var comment = new __WEBPACK_IMPORTED_MODULE_2__shared_product_service__["b" /* Comment */](0, this.product.id, new Date().toISOString(), "someone", this.newRating, this.newComment);
+        this.comments.unshift(comment);
+        // reduce 方法进行总分的重新设计
+        var sum = this.comments.reduce(function (sum, comment) { return sum + comment.rating; }, 0);
+        this.product.rating = sum / this.comments.length;
+        // 重置初值状态
+        this.newComment = null;
+        this.newRating = 5;
+        this.isCommentHidden = true;
     };
     return ProductDetailComponent;
 }());
@@ -482,13 +496,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var StarsComponent = (function () {
     function StarsComponent() {
         this.rating = 0;
+        this.ratingChange = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["r" /* EventEmitter */]();
+        this.readonly = true;
     }
     StarsComponent.prototype.ngOnInit = function () {
+        // this.stars = [false, false, true, true, true];
+    };
+    StarsComponent.prototype.ngOnChanges = function (changes) {
         this.stars = [];
         for (var i = 1; i <= 5; i++) {
             this.stars.push(i > this.rating);
         }
-        // this.stars = [false, false, true, true, true];
+    };
+    StarsComponent.prototype.clickStar = function (index) {
+        if (!this.readonly) {
+            this.rating = index + 1;
+            this.ratingChange.emit(this.rating);
+        }
     };
     return StarsComponent;
 }());
@@ -496,6 +520,14 @@ __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Input */])(),
     __metadata("design:type", Number)
 ], StarsComponent.prototype, "rating", void 0);
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* Output */])(),
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["r" /* EventEmitter */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["r" /* EventEmitter */]) === "function" && _a || Object)
+], StarsComponent.prototype, "ratingChange", void 0);
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Input */])(),
+    __metadata("design:type", Boolean)
+], StarsComponent.prototype, "readonly", void 0);
 StarsComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_13" /* Component */])({
         selector: 'app-stars',
@@ -505,6 +537,7 @@ StarsComponent = __decorate([
     __metadata("design:paramtypes", [])
 ], StarsComponent);
 
+var _a;
 //# sourceMappingURL=stars.component.js.map
 
 /***/ }),
@@ -705,28 +738,28 @@ module.exports = "<div class=\"carousel slide\" data-ride=\"carousel\">\r\n  <ol
 /***/ 228:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <hr>\n  <footer>\n    <div class=\"row\">\n      <div class=\"col-lg-12\">\n        <p>Angular 4 实战练习 &copy;2017.4 <a href=\"https://github.com/huangpuyuan\" target=\"_blank\">written by 开泰</a></p>\n      </div>\n    </div>\n  </footer>\n</div>\n"
+module.exports = "<div class=\"container\">\r\n  <hr>\r\n  <footer>\r\n    <div class=\"row\">\r\n      <div class=\"col-lg-12\">\r\n        <p>Angular 4 实战练习 &copy;2017.4 <a href=\"https://github.com/huangpuyuan\" target=\"_blank\">written by 开泰</a></p>\r\n      </div>\r\n    </div>\r\n  </footer>\r\n</div>\r\n"
 
 /***/ }),
 
 /***/ 229:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row carousel-container\">\r\n  <app-carousel></app-carousel>\r\n</div>\r\n<div class=\"row\">\r\n  <app-product></app-product>\r\n</div>\r\n"
+module.exports = "<div class=\"row carousel-container\">\n  <app-carousel></app-carousel>\n</div>\n<div class=\"row\">\n  <app-product></app-product>\n</div>\n"
 
 /***/ }),
 
 /***/ 230:
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-inverse navbar-fixed-top\">\n  <div class=\"container\">\n    <div class=\"navbar-header\">\n      <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-ex1-collapse\">\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button>\n      <a href=\"#\" class=\"navbar-brand\">在线竞拍</a>\n    </div>\n    <div class=\"collapse navbar-collapse navbar-ex1-collapse\">\n      <ul class=\"nav navbar-nav\">\n        <li><a href=\"#\">关于我们</a></li>\n        <li><a href=\"#\">联系我们</a></li>\n        <li><a href=\"#\">网站地图</a></li>\n      </ul>\n    </div>\n  </div>\n</nav>\n\n"
+module.exports = "<nav class=\"navbar navbar-inverse navbar-fixed-top\">\r\n  <div class=\"container\">\r\n    <div class=\"navbar-header\">\r\n      <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-ex1-collapse\">\r\n        <span class=\"icon-bar\"></span>\r\n        <span class=\"icon-bar\"></span>\r\n        <span class=\"icon-bar\"></span>\r\n      </button>\r\n      <a href=\"#\" class=\"navbar-brand\">在线竞拍</a>\r\n    </div>\r\n    <div class=\"collapse navbar-collapse navbar-ex1-collapse\">\r\n      <ul class=\"nav navbar-nav\">\r\n        <li><a href=\"#\">关于我们</a></li>\r\n        <li><a href=\"#\">联系我们</a></li>\r\n        <li><a href=\"#\">网站地图</a></li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</nav>\r\n\r\n"
 
 /***/ }),
 
 /***/ 231:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"thumbnail\">\r\n  <img src=\"http://placehold.it/820x230\" alt=\"\">\r\n  <div>\r\n    <h4 class=\"pull-right\">{{product.price}}</h4>\r\n    <h4>{{product.title}}</h4>\r\n    <p>{{product.desc}}</p>\r\n  </div>\r\n  <div>\r\n    <p class=\"pull-right\">{{comments.length}}</p>\r\n    <p>\r\n      <app-stars [rating]=\"product.rating\"></app-stars>\r\n    </p>\r\n  </div>\r\n</div>\r\n<div class=\"well\">\r\n  <div class=\"row\" *ngFor=\"let comment of comments\">\r\n    <hr>\r\n    <div class=\"col-md-12\">\r\n      <app-stars [rating]=\"comment.rating\"></app-stars>\r\n      <span>{{comment.user}}</span>\r\n      <span class=\"pull-right\">{{comment.timestamp}}</span>\r\n      <p></p>\r\n      <p>{{comment.content}}</p>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"thumbnail\">\r\n  <img src=\"http://placehold.it/820x230\" alt=\"\">\r\n  <div>\r\n    <h4 class=\"pull-right\">{{product.price}}</h4>\r\n    <h4>{{product.title}}</h4>\r\n    <p>{{product.desc}}</p>\r\n  </div>\r\n  <div>\r\n    <p class=\"pull-right\">{{comments.length}}</p>\r\n    <p>\r\n      <app-stars [rating]=\"product.rating\"></app-stars>\r\n    </p>\r\n  </div>\r\n</div>\r\n<div class=\"well\">\r\n  <div><button class=\"btn btn-success btn-sm\" (click)=\"isCommentHidden=!isCommentHidden\">发表评论</button></div>\r\n<div [hidden]=\"isCommentHidden\">\r\n  <hr>\r\n  <div><app-stars [(rating)]=\"newRating\" [readonly]=\"false\"></app-stars></div>\r\n  <div>\r\n    <textarea [(ngModel)]=\"newComment\"></textarea>\r\n  </div>\r\n  <div>\r\n    <button class=\"btn btn-default\" (click)=\"addComment()\">提交</button>\r\n  </div>\r\n</div>\r\n  <div class=\"row\" *ngFor=\"let comment of comments\">\r\n    <hr>\r\n    <div class=\"col-md-12\">\r\n      <app-stars [rating]=\"comment.rating\"></app-stars>\r\n      <span>{{comment.user}}</span>\r\n      <span class=\"pull-right\">{{comment.timestamp}}</span>\r\n      <p></p>\r\n      <p>{{comment.content}}</p>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -747,7 +780,7 @@ module.exports = "<form name=\"searchFrom\" role=\"form\">\r\n  <div class=\"for
 /***/ 234:
 /***/ (function(module, exports) {
 
-module.exports = "<p>\r\n  <span *ngFor=\"let star of stars\" class=\"glyphicon glyphicon-star\"\r\n  [class.glyphicon-star-empty]=\"star\"></span>\r\n  <!--<span class=\"glyphicon glyphicon-star glyphicon-star-empty\"></span>-->\r\n  <span>{{ rating }}星</span>\r\n</p>\r\n"
+module.exports = "<p>\r\n  <span *ngFor=\"let star of stars;let i = index;\" class=\"glyphicon glyphicon-star\"\r\n        [class.glyphicon-star-empty]=\"star\" (click)=\"clickStar(i)\"></span>\r\n  <!--<span class=\"glyphicon glyphicon-star glyphicon-star-empty\"></span>-->\r\n  <span>{{ rating | number:'1.0-2'}}星</span>\r\n</p>\r\n"
 
 /***/ }),
 
@@ -766,7 +799,7 @@ module.exports = __webpack_require__(138);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProductService; });
 /* unused harmony export Product */
-/* unused harmony export Comment */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return Comment; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
