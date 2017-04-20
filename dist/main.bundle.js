@@ -72,7 +72,7 @@ AppComponent = __decorate([
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(84);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(145);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(147);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__navbar_navbar_component__ = __webpack_require__(152);
@@ -84,7 +84,7 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__product_detail_product_detail_component__ = __webpack_require__(154);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__home_home_component__ = __webpack_require__(151);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__angular_router__ = __webpack_require__(85);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__shared_product_service__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__shared_product_service__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pipe_filter_pipe__ = __webpack_require__(153);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -335,7 +335,7 @@ FilterPipe = __decorate([
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(85);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_product_service__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_product_service__ = __webpack_require__(41);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProductDetailComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -394,8 +394,8 @@ var _a, _b;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_product_service__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(84);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_product_service__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__ = __webpack_require__(236);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProductComponent; });
@@ -446,6 +446,8 @@ var _a;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_product_service__ = __webpack_require__(41);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SearchComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -457,10 +459,37 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
 var SearchComponent = (function () {
-    function SearchComponent() {
+    function SearchComponent(productService) {
+        this.productService = productService;
+        var fb = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* FormBuilder */]();
+        this.formModel = fb.group({
+            title: ['', [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["e" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["e" /* Validators */].minLength(3)]],
+            price: [null, this.positiveNumberValidator],
+            category: ['-1']
+        });
     }
     SearchComponent.prototype.ngOnInit = function () {
+        this.categories = this.productService.getAllCategories();
+    };
+    SearchComponent.prototype.positiveNumberValidator = function (control) {
+        if (!control.value) {
+            return null;
+        }
+        var price = parseInt(control.value);
+        if (price > 0) {
+            return null;
+        }
+        else {
+            return { positiveNumber: true };
+        }
+    };
+    SearchComponent.prototype.onSearch = function () {
+        if (this.formModel.valid) {
+            console.log(this.formModel.value);
+        }
     };
     return SearchComponent;
 }());
@@ -470,9 +499,10 @@ SearchComponent = __decorate([
         template: __webpack_require__(233),
         styles: [__webpack_require__(220)]
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__shared_product_service__["a" /* ProductService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_product_service__["a" /* ProductService */]) === "function" && _a || Object])
 ], SearchComponent);
 
+var _a;
 //# sourceMappingURL=search.component.js.map
 
 /***/ }),
@@ -773,7 +803,7 @@ module.exports = "<div class=\"row\">\r\n  <div class=\"col-sm-12\">\r\n    <div
 /***/ 233:
 /***/ (function(module, exports) {
 
-module.exports = "<form name=\"searchFrom\" role=\"form\">\r\n  <div class=\"form-group\">\r\n    <label for=\"productTitle\">商品名称</label>\r\n    <input type=\"text\" id=\"productTitle\" placeholder=\"商品名称\" class=\"form-control\">\r\n  </div>\r\n  <div class=\"form-group\">\r\n    <label for=\"productPrince\">商品价格</label>\r\n    <input type=\"number\" id=\"productPrince\" placeholder=\"商品价格\" class=\"form-control\">\r\n  </div>\r\n  <div class=\"form-group\">\r\n    <label for=\"productCategory\">商品类别</label>\r\n    <select name=\"\" id=\"productCategory\" class=\"form-control\"></select>\r\n    <!--<input type=\"text\" id=\"productCategory\" placeholder=\"商品类别\" class=\"form-control\">-->\r\n  </div>\r\n  <div class=\"form-group\">\r\n    <button type=\"submit\" class=\"btn btn-primary btn-block\">搜索</button>\r\n  </div>\r\n</form>\r\n"
+module.exports = "<form name=\"searchFrom\" role=\"form\" [formGroup]=\"formModel\" (ngSubmit)=\"onSearch()\" novalidate>\r\n  <div class=\"form-group\" [class.has-error]=\"formModel.hasError('minlength','title') || formModel.hasError('required','title') && formModel.get('title').touched\">\r\n    <label for=\"productTitle\">商品名称</label>\r\n    <input formControlName=\"title\" type=\"text\" id=\"productTitle\" placeholder=\"商品名称\" class=\"form-control\">\r\n    <span class=\"help-block\" [class.hidden]=\"!formModel.hasError('required','title') || !formModel.get('title').touched\">\r\n      名称不能为空\r\n    </span>\r\n    <span class=\"help-block\" [class.hidden]=\"!formModel.hasError('minlength','title')\">\r\n      请至少输入3个字\r\n    </span>\r\n  </div>\r\n  <div class=\"form-group\" [class.has-error]=\"formModel.hasError('positiveNumber','price')\">\r\n    <label for=\"productPrince\" >商品价格</label>\r\n    <input formControlName=\"price\" type=\"number\" id=\"productPrince\" placeholder=\"商品价格\" class=\"form-control\">\r\n    <span class=\"help-block\" [class.hidden]=\"!formModel.hasError('positiveNumber','price')\">\r\n      请输入正数\r\n    </span>\r\n  </div>\r\n  <div class=\"form-group\">\r\n    <label for=\"productCategory\">商品类别</label>\r\n    <select  formControlName=\"category\" name=\"\" id=\"productCategory\" class=\"form-control\">\r\n      <option value=\"-1\">全部分类</option>\r\n      <option *ngFor=\"let category of categories\" [value]=\"category\">{{category}}</option>\r\n    </select>\r\n    <!--<input type=\"text\" id=\"productCategory\" placeholder=\"商品类别\" class=\"form-control\">-->\r\n  </div>\r\n  <div class=\"form-group\">\r\n    <button type=\"submit\" class=\"btn btn-primary btn-block\">搜索</button>\r\n  </div>\r\n</form>\r\n"
 
 /***/ }),
 
@@ -784,15 +814,7 @@ module.exports = "<p>\r\n  <span *ngFor=\"let star of stars;let i = index;\" cla
 
 /***/ }),
 
-/***/ 503:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(138);
-
-
-/***/ }),
-
-/***/ 57:
+/***/ 41:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -814,8 +836,8 @@ var ProductService = (function () {
     function ProductService() {
         this.products = [
             new Product(1, '第一个商品', 1.99, 1.5, "这是一个商品，Angular组件学习之旅", ["电子产品", "硬件设施"]),
-            new Product(2, "第二个商品", 2.99, 3.5, "这是二个商品，Angular组件学习之旅", ["硬件设施"]),
-            new Product(3, "第三个商品电子", 3.99, 2.5, "这是三个商品，Angular组件学习之旅", ["电子产品", "硬件设施"]),
+            new Product(2, "第二个商品", 2.99, 3.5, "这是二个商品，Angular组件学习之旅", ["图书"]),
+            new Product(3, "第三个商品电子", 3.99, 2.5, "这是三个商品，Angular组件学习之旅", ["硬件设施"]),
             new Product(4, "第四个商品电子", 4.99, 4.5, "这是四个商品，Angular组件学习之旅", ["电子产品", "硬件设施"]),
             new Product(5, "第五个商品", 5.99, 3.5, "这是五个商品，Angular组件学习之旅", ["电子产品"]),
             new Product(6, "第六个商品", 6.99, 5, "这是六个商品，Angular组件学习之旅", ["图书"])
@@ -827,6 +849,9 @@ var ProductService = (function () {
             new Comment(4, 2, "2017-4-19 13:52:42", "赵六", 4, "东西不错")
         ];
     }
+    ProductService.prototype.getAllCategories = function () {
+        return ["电子产品", "硬件设施", "图书"];
+    };
     ProductService.prototype.getProducts = function () {
         return this.products;
     };
@@ -868,6 +893,14 @@ var Comment = (function () {
 }());
 
 //# sourceMappingURL=product.service.js.map
+
+/***/ }),
+
+/***/ 503:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(138);
+
 
 /***/ })
 
