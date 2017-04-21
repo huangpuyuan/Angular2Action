@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ProductService} from "../shared/product.service";
 
@@ -15,10 +15,11 @@ export class SearchComponent implements OnInit {
   constructor(private productService: ProductService) {
     let fb = new FormBuilder();
     this.formModel = fb.group({
-      title: ['', [Validators.required,Validators.minLength(3)]],
+      // title: ['', [Validators.required, Validators.minLength(2)]],
+      title: ['', [Validators.minLength(2)]],
       price: [null, this.positiveNumberValidator],
       category: ['-1']
-    })
+    });
   }
 
   ngOnInit() {
@@ -41,6 +42,7 @@ export class SearchComponent implements OnInit {
   onSearch() {
     if (this.formModel.valid) {
       console.log(this.formModel.value);
+      this.productService.searchEvent.emit(this.formModel.value);
     }
   }
 

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ProductService, Product} from "../shared/product.service";
 import {FormControl} from "@angular/forms";
+import {Observable} from "rxjs";
 import "rxjs/Rx";
 
 @Component({
@@ -9,7 +10,7 @@ import "rxjs/Rx";
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
-  private products: Product [];
+  private products: Observable<Product[]>;
   private keyword: string;
   private titleFilter: FormControl = new FormControl();
 
@@ -23,6 +24,11 @@ export class ProductComponent implements OnInit {
 
   ngOnInit() {
     this.products = this.productService.getProducts();
+
+    this.productService.searchEvent.subscribe(
+      params => this.products = this.productService.search(params)
+    );
+
   }
 
 }
